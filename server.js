@@ -1,13 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 const axios = require('axios');
 const cheerio = require('cheerio');
-const cors = require('cors');
 const app = express();
-const port = 3000;
 
-const GUILD_URL = 'https://rubinot.com.br/?subtopic=guilds&page=view&GuildName=Ultimate%20Squad';
+const GUILD_URL = 'https://rubinot.com.br/?subtopic=guilds';
 
-// Adicionar middleware CORS
 app.use(cors());
 
 app.get('/api/guild', async (req, res) => {
@@ -17,7 +15,7 @@ app.get('/api/guild', async (req, res) => {
     const $ = cheerio.load(html);
 
     const characters = [];
-    $('table.TableContent tbody tr').each((index, element) => {
+    $('.TableContent tbody tr').each((index, element) => {
       const columns = $(element).find('td');
       if (columns.length === 6) {
         const rank = $(columns[0]).text().trim();
@@ -42,11 +40,13 @@ app.get('/api/guild', async (req, res) => {
 
     res.json(characters);
   } catch (error) {
-    console.error('Error fetching guild data:', error);
-    res.status(500).send('Error fetching guild data');
+    console.error('Erro ao obter os dados da guild:', error);
+    res.status(500).send('Erro ao obter os dados da guild');
   }
 });
 
+// Iniciar o servidor
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Servidor rodando na porta ${port}`);
 });
