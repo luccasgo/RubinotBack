@@ -6,12 +6,7 @@ const app = express();
 
 const GUILD_URL = 'https://rubinot.com.br/?subtopic=guilds&page=view&GuildName=Ultimate%20Squad';
 
-const corsOptions = {
-    origin: 'https://www.nileshblog.tech/',//(https://your-client-app.com)
-    optionsSuccessStatus: 200,
-  };
- 
-  app.use(cors(corsOptions));
+app.use(cors());
 
 app.get('/guild', async (req, res) => {
   try {
