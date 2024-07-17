@@ -6,9 +6,14 @@ const app = express();
 
 const GUILD_URL = 'https://rubinot.com.br/?subtopic=guilds&page=view&GuildName=Ultimate%20Squad';
 
-app.use(cors());
+const corsOptions = {
+    origin: 'https://www.nileshblog.tech/',//(https://your-client-app.com)
+    optionsSuccessStatus: 200,
+  };
+ 
+  app.use(cors(corsOptions));
 
-app.get('/api/guild', async (req, res) => {
+app.get('/guild', async (req, res) => {
   try {
     const response = await axios.get(GUILD_URL);
     const html = response.data;
