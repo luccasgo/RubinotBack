@@ -6,10 +6,10 @@ const app = express();
 
 const GUILD_URL = 'https://rubinot.com.br/?subtopic=guilds&page=view&GuildName=Ultimate%20Squad';
 
-// Middleware CORS
+app.use(express.json());
 app.use(cors({ origin: true, credentials: true }));
 
-app.get('/api/guild', async (req, res) => {
+app.get('/guild', async (req, res) => {
   try {
     const response = await axios.get(GUILD_URL);
     const html = response.data;
@@ -50,4 +50,5 @@ app.get('/api/guild', async (req, res) => {
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
+  
 });
