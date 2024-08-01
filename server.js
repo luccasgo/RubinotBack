@@ -4,7 +4,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const app = express();
 
-const GUILD_URL = 'https://rubinot.com.br/?subtopic=guilds&page=view&GuildName=Ultimate%20Squad';
+const GUILD_URL = 'https://rubinot.com.br/?subtopic=guilds&page=view&GuildName= New%Direction';
 
 app.use(express.json());
 app.use(cors({ origin: true, credentials: true }));
